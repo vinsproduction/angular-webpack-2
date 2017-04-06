@@ -115,7 +115,7 @@ export class AppModule {}
 
 console.log("ENV " + process.env.ENV);
 
-if (process.env.ENV !== 'development') {
+if (process.env.ENV !== 'dev') {
 	enableProdMode();
 }
 

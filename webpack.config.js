@@ -1,5 +1,5 @@
 
-const ENV = process.env.NODE_ENV = process.env.ENV || 'production'
+const ENV = process.env.NODE_ENV = process.env.ENV || 'prod'
 
 console.log("\r\n\r\n ============================\r\n\r\n");
 console.log("ENV: " + ENV);
@@ -25,7 +25,38 @@ var plugins =  [
   )
 ]
 
+if ( ENV === "build" || ENV === "prod" ) {
+
+	plugins = plugins.concat([
+
+		new webpack.optimize.UglifyJsPlugin({
+
+			beautify: false,
+			comments: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true,
+        sequences: true,
+				booleans: true,
+				loops: true,
+				unused: true,
+				warnings: false,
+				drop_console: false,
+				unsafe: true
+      },
+      
+		}),
+
+	])
+
+}
+
 var config = {
+
+	devtool: ( ENV === "dev" ) ? "source-map" : "cheap-module-source-map",
 
   entry: {
     'polyfills': './frontend/polyfills.ts',
