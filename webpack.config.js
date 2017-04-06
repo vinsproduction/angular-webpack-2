@@ -55,11 +55,10 @@ var config = {
 
 			new webpack.optimize.CommonsChunkPlugin({
 				name: ['app', 'vendor', 'polyfills'],
-				children: true
 			}),
 
 			new HtmlWebpackPlugin({
-				inject: "head",
+				// inject: "head",
 				template: "./frontend/index.pug",
 				filename: "./index.html",
 				chunksSortMode: function(a, b) {
